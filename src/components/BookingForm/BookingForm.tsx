@@ -3,11 +3,30 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { bookingSchema } from "@/schemas/bookingSchema";
-import type { BookingFormData } from "@/types/booking";
+import type { BookingFormData, BookingStatus } from "@/types/booking";
 
 import styles from "./BookingForm.module.css";
 
-const BookingForm = () => {
+const timeSlots = [
+  "12:00",
+  "13:00",
+  "14:00",
+  "15:00",
+  "16:00",
+  "17:00",
+  "18:00",
+  "19:00",
+  "20:00",
+  "21:00",
+  "22:00",
+];
+
+type BookingFormProps = {
+  handleBookingSubmit: (data: BookingFormData) => void;
+  status: BookingStatus;
+};
+
+const BookingForm = ({ handleBookingSubmit, status }: BookingFormProps) => {
   const {
     register,
     handleSubmit,
@@ -17,7 +36,7 @@ const BookingForm = () => {
   });
 
   const onSubmit = (data: BookingFormData) => {
-    console.log(data);
+    handleBookingSubmit(data);
   };
 
   return (
@@ -85,17 +104,11 @@ const BookingForm = () => {
             {...register("time")}
           >
             <option value="">Выберите время</option>
-            <option value="12:00">12:00</option>
-            <option value="13:00">13:00</option>
-            <option value="14:00">14:00</option>
-            <option value="15:00">15:00</option>
-            <option value="16:00">16:00</option>
-            <option value="17:00">17:00</option>
-            <option value="18:00">18:00</option>
-            <option value="19:00">19:00</option>
-            <option value="20:00">20:00</option>
-            <option value="21:00">21:00</option>
-            <option value="22:00">22:00</option>
+            {timeSlots.map((time) => (
+              <option key={time} value={time}>
+                {time}
+              </option>
+            ))}
           </select>
           {errors.time && (
             <span className={styles.error}>{errors.time.message}</span>
@@ -122,8 +135,11 @@ const BookingForm = () => {
             Доступно для бронирования: 1–12 гостей
           </span>
         </div>
-
-        <button type="submit">Забронировать</button>
+        {status === "loading" ? (
+          <button disabled>Бронирую...</button>
+        ) : (
+          <button type="submit">Забронировать</button>
+        )}
       </form>
     </section>
   );

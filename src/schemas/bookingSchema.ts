@@ -3,6 +3,12 @@ import { z } from "zod";
 export const bookingSchema = z.object({
   name: z.string().trim().min(2, "Имя должно содержать минимум 2 символа"),
   phone: z.string().refine((value) => {
+    const allowedCharacters = /^[\d\s()+-]+$/.test(value);
+
+    if (!allowedCharacters) {
+      return false;
+    }
+
     const digits = value.replace(/\D/g, "");
 
     return (

@@ -5,3 +5,5 @@ export type BookingFormData = {
   time: string;
   guests: number;
 };
+
+export type BookingStatus = "idle" | "loading" | "success";
