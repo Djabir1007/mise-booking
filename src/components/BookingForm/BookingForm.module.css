@@ -89,3 +89,24 @@
   line-height: 1.4;
   color: #8a8a8a;
 }
+
+@media (max-width: 770px) {
+  .bookingForm {
+    padding: 24px;
+    border-radius: 16px;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+
+  .subtitle {
+    margin-bottom: 24px;
+    font-size: 14px;
+  }
+
+  .form {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
