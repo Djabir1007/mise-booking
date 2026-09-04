@@ -1,6 +1,16 @@
+import type { BookingFormData } from "@/types/booking";
+
 import styles from "./ConfirmationScreen.module.css";
 
-const ConfirmationScreen = () => {
+type ConfirmationScreenProps = {
+  bookingData: BookingFormData;
+  handleResetBooking: () => void;
+};
+
+const ConfirmationScreen = ({
+  bookingData,
+  handleResetBooking,
+}: ConfirmationScreenProps) => {
   return (
     <section className={styles.confirmation}>
       <div className={styles.icon}>✓</div>
@@ -14,26 +24,28 @@ const ConfirmationScreen = () => {
       <div className={styles.details}>
         <div>
           <span>Имя</span>
-          <strong>Пашаев Джабир</strong>
+          <strong>{bookingData.name}</strong>
         </div>
 
         <div>
           <span>Дата</span>
-          <strong>10 сентября 2026</strong>
+          <strong>{bookingData.date}</strong>
         </div>
 
         <div>
           <span>Время</span>
-          <strong>19:00</strong>
+          <strong>{bookingData.time}</strong>
         </div>
 
         <div>
           <span>Количество гостей</span>
-          <strong>4</strong>
+          <strong>{bookingData.guests}</strong>
         </div>
       </div>
 
-      <button type="button">Забронировать ещё</button>
+      <button type="button" onClick={handleResetBooking}>
+        Забронировать ещё
+      </button>
     </section>
   );
 };
