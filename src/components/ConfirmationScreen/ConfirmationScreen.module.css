@@ -7,6 +7,7 @@
   border-radius: 20px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
   text-align: center;
+  animation: fadeInUp 0.3s ease;
 }
 
 .icon {
@@ -76,6 +77,17 @@
 
 .confirmation button:hover {
   background: #b88632;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 600px) {

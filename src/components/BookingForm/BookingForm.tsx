@@ -33,6 +33,7 @@ const BookingForm = ({ handleBookingSubmit, status }: BookingFormProps) => {
     formState: { errors },
   } = useForm<BookingFormData>({
     resolver: zodResolver(bookingSchema),
+    mode: "onBlur",
   });
 
   const onSubmit = (data: BookingFormData) => {
