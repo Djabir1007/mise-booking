@@ -1,11 +1,9 @@
 "use client";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { bookingSchema } from "@/schemas/bookingSchema";
 import type { BookingFormData, BookingStatus } from "@/types/booking";
 
 import styles from "./BookingForm.module.css";
+import { useBookingForm } from "@/hooks/useBookingForm";
 
 const timeSlots = [
   "12:00",
@@ -31,10 +29,7 @@ const BookingForm = ({ handleBookingSubmit, status }: BookingFormProps) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<BookingFormData>({
-    resolver: zodResolver(bookingSchema),
-    mode: "onBlur",
-  });
+  } = useBookingForm();
 
   const onSubmit = (data: BookingFormData) => {
     handleBookingSubmit(data);
